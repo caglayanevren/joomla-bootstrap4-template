@@ -32,9 +32,7 @@ if ($task == "edit" || $layout == "form") {
 }
 
 // Add Stylesheets
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/bootstrap.min.css');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/font-awesome.min.css');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/template.css');
+$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/bundle.min.css');
 
 // Add scripts
 JHtml::_('jquery.framework');
