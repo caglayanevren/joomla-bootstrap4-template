@@ -36,9 +36,29 @@ $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/bun
 
 // Add scripts
 JHtml::_('jquery.framework');
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/popper.min.js');
-$doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/bootstrap.min.js');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/popper.min.js');
+//$doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/bootstrap.min.js');
 $doc->addScript($this->baseurl . '/templates/' . $this->template . '/js/template.js');
+
+$dontInclude = array(
+    '/media/jui/js/jquery-noconflict.js',
+    '/media/jui/js/jquery-migrate.min.js',
+    '/media/system/js/caption.js'
+    );
+
+foreach($doc->_scripts as $key => $script){
+    if(in_array($key, $dontInclude)){
+        unset($doc->_scripts[$key]);
+    }
+}
+
+if (isset($this->_script['text/javascript'])) {
+    $this->_script['text/javascript'] = preg_replace('%jQuery\(\window\)\.on\(\'load\',\s*function\(\)\s*{\s*new\s*JCaption\(\'img.caption\'\);\s*}\);\s*%', '', $this->_script['text/javascript']);
+    if (empty($this->_script['text/javascript']))
+    unset($this->_script['text/javascript']);
+}
+
+unset($this->_styleSheets['/plugins/system/jce/css/content.css?b70cfec5663754bd326423aea2d40e05']);
 
 // Adjusting content width
 if ($this->countModules('sidebar-left') && $this->countModules('sidebar-right')) {
@@ -50,6 +70,8 @@ if ($this->countModules('sidebar-left') && $this->countModules('sidebar-right'))
 } else {
     $span = "col-md-12";
 }
+$this->setGenerator(null);
+$doc->setMetadata('x-ua-compatible', 'IE=edge');
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $this->language; ?>" lang="<?php echo $this->language; ?>" dir="<?php echo $this->direction; ?>">
