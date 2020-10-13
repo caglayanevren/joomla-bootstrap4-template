@@ -32,16 +32,7 @@ if ($task == "edit" || $layout == "form") {
 }
 
 // Add Stylesheets
-<<<<<<< HEAD
 $doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/bundle.min.css');
-=======
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/bootstrap.min.css');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/font-awesome.min.css');
-$doc->addStyleSheet($this->baseurl . '/templates/' . $this->template . '/css/template.css');
-if($this->params->get('customcss')) {
-    $doc->addStyleSheet($this->baseurl . htmlspecialchars($this->params->get('customcss'), ENT_COMPAT, 'UTF-8'));
-} 
->>>>>>> upstream/master
 
 // Add scripts
 JHtml::_('jquery.framework');
